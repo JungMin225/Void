@@ -1,0 +1,278 @@
+/* src/pages/MonkTalkSection.css */
+
+:root {
+  --bg: #050505;
+  --fg: #eaeaea;
+  --muted: rgba(234, 234, 234, 0.55);
+  --line: rgba(234, 234, 234, 0.35);
+  --accent-orange: #ff7a1a;
+
+  --radius-card: 28px;
+  --radius-card-lg: 34px;
+
+  --card-w: 360px;
+  --card-h: 220px;
+
+  --rule-w: 70%;
+  --rule-h: 1px;
+  --rule-color: rgba(234, 234, 234, 0.35);
+}
+
+.dharma-page {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR",
+    sans-serif;
+}
+
+
+.dharma-topbar__grid {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  border-right: 1px solid var(--line);
+}
+
+.dharma-topbar__grid::before,
+.dharma-topbar__grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.dharma-topbar__grid::before {
+  left: 33.33%;
+}
+.dharma-topbar__grid::after {
+  left: 66.66%;
+}
+
+.dharma-year {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.dharma-topbar__accent {
+  background: var(--accent-orange);
+}
+
+.dharma-layout {
+  gap: 0;
+  min-height: calc(100vh - 72px);
+}
+
+
+.dharma-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 42px 44px;
+  align-items: start;
+}
+
+.dharma-card {
+  width: 100%;
+  max-width: var(--card-w);
+  min-height: var(--card-h);
+
+  border-radius: var(--radius-card-lg);
+  border: 1.2px solid var(--line);
+
+  padding: 28px 30px 26px 30px;
+  box-sizing: border-box;
+
+  background: transparent;
+}
+
+.dharma-card__speaker {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--fg);
+  opacity: 0.9;
+  margin: 0 0 12px 0;
+}
+
+.dharma-card__rule {
+  width: var(--rule-w);
+  height: var(--rule-h);
+  background: var(--rule-color);
+  margin-bottom: 18px;
+}
+
+.dharma-card__text {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0;
+  max-width: 92%;
+}
+
+.dharma-card.tone-gold {
+  border-color: rgba(220, 210, 150, 0.85);
+}
+.dharma-card.tone-mint {
+  border-color: rgba(190, 230, 210, 0.85);
+}
+.dharma-card.tone-sky {
+  border-color: rgba(170, 210, 240, 0.85);
+}
+.dharma-card.tone-blue {
+  border-color: rgba(150, 190, 255, 0.85);
+}
+.dharma-card.tone-blue-strong {
+  border-color: rgba(90, 150, 255, 0.9);
+}
+.dharma-card.tone-purple {
+  border-color: rgba(190, 120, 240, 0.85);
+}
+.dharma-card.tone-pink {
+  border-color: rgba(220, 140, 200, 0.85);
+}
+.dharma-card.tone-rose {
+  border-color: rgba(235, 120, 140, 0.85);
+}
+.dharma-card.tone-orange {
+  border-color: rgba(255, 120, 40, 0.9);
+}
+
+
+.dharma-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 15px;
+  text-align: left;
+}
+
+.dharma-tab:focus-visible {
+  outline: 1px solid var(--line);
+  outline-offset: 6px;
+}
+
+.dharma-tab__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.dharma-tab.is-active {
+  color: var(--accent-orange);
+}
+
+.dharma-tab.is-active .dharma-tab__dot {
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+.dharma-card.tone-gold {
+  --neon: rgba(220, 210, 150, 0.95);
+  border-color: rgba(220, 210, 150, 0.55);
+}
+.dharma-card.tone-mint {
+  --neon: rgba(190, 230, 210, 0.95);
+  border-color: rgba(190, 230, 210, 0.55);
+}
+.dharma-card.tone-sky {
+  --neon: rgba(170, 210, 240, 0.95);
+  border-color: rgba(170, 210, 240, 0.55);
+}
+.dharma-card.tone-blue {
+  --neon: rgba(150, 190, 255, 0.95);
+  border-color: rgba(150, 190, 255, 0.55);
+}
+.dharma-card.tone-blue-strong {
+  --neon: rgba(90, 150, 255, 0.98);
+  border-color: rgba(90, 150, 255, 0.6);
+}
+.dharma-card.tone-purple {
+  --neon: rgba(190, 120, 240, 0.95);
+  border-color: rgba(190, 120, 240, 0.55);
+}
+.dharma-card.tone-pink {
+  --neon: rgba(220, 140, 200, 0.95);
+  border-color: rgba(220, 140, 200, 0.55);
+}
+.dharma-card.tone-rose {
+  --neon: rgba(235, 120, 140, 0.95);
+  border-color: rgba(235, 120, 140, 0.55);
+}
+.dharma-card.tone-orange {
+  --neon: rgba(255, 120, 40, 0.98);
+  border-color: rgba(255, 120, 40, 0.6);
+}
+
+/* ---------- Neon hover interaction ---------- */
+
+.dharma-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.dharma-card::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      120% 120% at 10% 10%,
+      rgba(255,255,255,0.08),
+      transparent 45%
+    );
+}
+
+.dharma-card:hover {
+  border-color: var(--neon, rgba(234,234,234,0.9));
+
+  box-shadow:
+    0 0 0.5px var(--neon, rgba(234,234,234,0.9)),
+    0 0 10px rgba(255,255,255,0.06),
+    0 0 18px color-mix(in srgb, var(--neon, #fff) 45%, transparent),
+    0 0 32px color-mix(in srgb, var(--neon, #fff) 30%, transparent);
+}
+
+.dharma-card:hover::after {
+  opacity: 0.9;
+  filter: blur(14px);
+}
+
+.dharma-card:hover .dharma-card__speaker {
+  color: var(--accent-orange);
+  opacity: 1;
+}
+
+.dharma-card:hover .dharma-card__text {
+  color: rgba(234, 234, 234, 0.72);
+}

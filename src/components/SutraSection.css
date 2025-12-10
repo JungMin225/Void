@@ -1,0 +1,102 @@
+/* src/components/SutraSection.css */
+
+.sutra-section {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 320vh;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.sutra-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.sutra-svg {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+
+  color: var(--sutra-stroke, #fff);
+
+  display: block;
+  position: relative;
+  left: 6%;
+  top: 7%;
+  opacity: 0.1;
+  will-change: opacity;
+  z-index: 1;
+}
+
+.sutra-svg .cls-1 {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.sutra-cards {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sutra-cards__col {
+  width: min(640px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sutra-card {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  align-items: stretch;
+  background: #5a9fff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 18px 18px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: transform, opacity;
+}
+
+.sutra-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sutra-card__title {
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.sutra-card__desc {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.sutra-card__thumb {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgb(255, 255, 255);
+  width: 100px;
+  height: 100px;
+}
+
