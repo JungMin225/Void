@@ -1,10 +1,16 @@
 // src/components/IntroSection.jsx
 import React, { useEffect, useRef, useState } from 'react';
 
+import introBgm from '../assets/audio/UnderwaterBoy.mp3';
+
 function IntroSection() {
   const rootRef = useRef(null);
+
   const [cellSize, setCellSize] = useState(140);
   const [gridCell, setGridCell] = useState({ x: null, y: null });
+
+  const audioRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (!rootRef.current) return;
@@ -14,6 +20,51 @@ function IntroSection() {
     const parsed = parseInt(value, 10);
     if (!Number.isNaN(parsed)) setCellSize(parsed);
   }, []);
+
+  useEffect(() => {
+    const a = new Audio(introBgm);
+    a.preload = 'auto';
+    a.loop = true;
+    a.volume = 0.5;
+    audioRef.current = a;
+
+    const handleEnded = () => setIsPlaying(false);
+    a.addEventListener('ended', handleEnded);
+
+    return () => {
+      a.removeEventListener('ended', handleEnded);
+      try {
+        a.pause();
+      } catch {
+      audioRef.current = null;}
+    };
+  }, []);
+
+  const toggleSound = async () => {
+    const a = audioRef.current;
+    if (!a) return;
+
+    // 이미 재생 중이면 멈춤
+    if (isPlaying) {
+      try {
+        a.pause();
+      } catch {
+      setIsPlaying(false);
+      return;}
+    }
+
+    // 재생 시작
+    try {
+      // 필요하면 항상 처음부터 재생하고 싶을 때:
+      // a.currentTime = 0;
+
+      await a.play();
+      setIsPlaying(true);
+    } catch {
+      // 브라우저 정책/예외 상황 대비
+      setIsPlaying(false);
+    }
+  };
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -32,6 +83,7 @@ function IntroSection() {
 
   return (
     <div
+      ref={rootRef}
       className="intro-root"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -54,31 +106,11 @@ function IntroSection() {
             />
           </defs>
 
-          <circle
-            className="ripple-circle ripple-circle-1"
-            cx="100"
-            cy="120"
-            r="60"
-          />
-          <circle
-            className="ripple-circle ripple-circle-2"
-            cx="100"
-            cy="120"
-            r="60"
-          />
-          <circle
-            className="ripple-circle ripple-circle-3"
-            cx="100"
-            cy="120"
-            r="60"
-          />
+          <circle className="ripple-circle ripple-circle-1" cx="100" cy="120" r="60" />
+          <circle className="ripple-circle ripple-circle-2" cx="100" cy="120" r="60" />
+          <circle className="ripple-circle ripple-circle-3" cx="100" cy="120" r="60" />
 
-          <circle
-            className="orbit-ring orbit-ring-main"
-            cx="100"
-            cy="120"
-            r="95"
-          />
+          <circle className="orbit-ring orbit-ring-main" cx="100" cy="120" r="95" />
 
           <g className="intro-flower-svg intro-flower-svg-main">
             {Array.from({ length: 8 }).map((_, i) => (
@@ -87,7 +119,7 @@ function IntroSection() {
                 href="#blue-petal-path"
                 className="intro-petal-svg intro-petal-svg-main"
                 fill="url(#bluePetal)"
-                transform={`rotate(${i * 45} 100 120)`} // 중심 (100,120) 기준 45도씩
+                transform={`rotate(${i * 45} 100 120)`}
               />
             ))}
           </g>
@@ -125,16 +157,21 @@ function IntroSection() {
                 href="#pink-petal-path"
                 className="intro-petal-svg intro-petal-svg-sub"
                 fill="url(#pinkPetal)"
-                transform={`rotate(${i * 45} 100 120)`} // 동일하게 (100,120) 중심
+                transform={`rotate(${i * 45} 100 120)`}
               />
             ))}
           </g>
         </svg>
       </div>
 
-      <button className="intro-sound-pill">
+      <button
+        type="button"
+        className={`intro-sound-pill ${isPlaying ? 'is-on' : 'is-off'}`}
+        onClick={toggleSound}
+        aria-pressed={isPlaying}
+      >
         <span className="intro-sound-dot" />
-        <span>소리</span>
+        <span>{isPlaying ? 'ON' : 'OFF'}</span>
       </button>
 
       {gridCell.x !== null && (

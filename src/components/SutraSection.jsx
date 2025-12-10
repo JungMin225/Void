@@ -18,10 +18,8 @@ function SutraSection() {
   const lengthsRef = useRef([]);
   const rafRef = useRef(0);
 
-  // 카드 ref 배열
   const cardRefs = useRef([]);
 
-  // 알림 카드 데이터 (원하는 문구로 교체)
   const notifications = useMemo(
     () => [
       { title: '부처', desc: '평화는 안에서 시작된다' },
@@ -40,11 +38,9 @@ function SutraSection() {
       '(prefers-reduced-motion: reduce)'
     )?.matches;
 
-    // 1) path 수집
     const paths = Array.from(svg.querySelectorAll('path.cls-1'));
     pathsRef.current = paths;
 
-    // 2) 길이 캐싱 + 초기 세팅
     lengthsRef.current = paths.map((p) => {
       const len = p.getTotalLength();
       p.style.strokeDasharray = `${len}`;
@@ -54,17 +50,14 @@ function SutraSection() {
       return len;
     });
 
-    // 섹션 내부 스크롤 진행도 0~1
     const calcSectionProgress = () => {
       const rect = wrap.getBoundingClientRect();
       const vh = window.innerHeight;
 
-      // 섹션이 뷰포트를 지나가는 동안의 "실제 스크롤 가능 거리"
       const total = rect.height - vh;
 
       if (total <= 0) return rect.top <= 0 ? 1 : 0;
 
-      // rect.top이 0보다 작아질수록(위로 올라갈수록) 진행
       const passed = clamp(-rect.top, 0, total);
 
       return passed / total;
@@ -74,24 +67,20 @@ function SutraSection() {
       const pathsNow = pathsRef.current;
       const lens = lengthsRef.current;
 
-      // ===== Phase 1: SVG draw + opacity =====
-      const svgPhaseEnd = 0.5; // 50%
+      const svgPhaseEnd = 0.5;
       const svgProgress = clamp(sectionProgress / svgPhaseEnd);
       const easedSvg = prefersReduced ? 1 : easeOutCubic(svgProgress);
 
-      // stroke draw
       for (let i = 0; i < pathsNow.length; i++) {
         const p = pathsNow[i];
         const len = lens[i];
         p.style.strokeDashoffset = `${len * (1 - easedSvg)}`;
       }
 
-      // svg opacity 0.1 -> 1
       const minOpacity = 0.1;
       const svgOpacity = minOpacity + (1 - minOpacity) * easedSvg;
       svg.style.opacity = `${svgOpacity}`;
 
-      // ===== Phase 2: Cards sequential enter =====
       const cardsStart = svgPhaseEnd;
       const cardsRange = 1 - cardsStart;
       const count = notifications.length || 1;
@@ -104,7 +93,6 @@ function SutraSection() {
         const local = clamp((sectionProgress - cardsStart - i * step) / step);
         const easedLocal = prefersReduced ? 1 : easeOutCubic(local);
 
-        // 아래에서 위로 살짝 올라오며 등장
         const translateY = 28 * (1 - easedLocal);
 
         el.style.opacity = `${easedLocal}`;
@@ -135,9 +123,7 @@ function SutraSection() {
 
   return (
     <section ref={wrapRef} className="sutra-section is-dark">
-      {/* Sticky Stage */}
       <div className="sutra-stage">
-        {/* Background SVG */}
         <svg ref={svgRef} className="sutra-svg" viewBox="0 0 870.96 833.24">
           <defs>
             <style>{`

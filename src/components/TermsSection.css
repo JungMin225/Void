@@ -9,7 +9,7 @@
   overflow: hidden;
 }
 
-/* ✅ 스테이지는 화면에 고정되어 "중간에 멈춰있는 느낌" 유지 */
+
 .terms-stage {
   position: sticky;
   top: 0;
@@ -19,9 +19,6 @@
   will-change: opacity;
 }
 
-/* =========================
-   중앙 라인
-========================= */
 .terms-line {
   position: absolute;
   top: 50%;
@@ -46,10 +43,6 @@
   transform: scaleX(0);
 }
 
-/* =========================
-   union 액자(이미지)
-   - JS가 scale 제어
-========================= */
 .terms-frame {
   position: absolute;
   left: 50%;
@@ -73,9 +66,6 @@
   object-fit: contain;
 }
 
-/* =========================
-   원/중앙 영역(원 인터랙션 X)
-========================= */
 .terms-circle-holder {
   position: absolute;
   left: 50%;
@@ -94,7 +84,6 @@
   border: 1.2px solid rgba(150, 190, 255, 0.9);
 }
 
-/* 메인 이미지: 기본 흑백 */
 .terms-main-img {
   position: absolute;
   left: 50%;
@@ -108,9 +97,7 @@
   will-change: filter;
 }
 
-/* =========================
-   ✅ 불교 용어 텍스트 레이어
-========================= */
+
 .terms-text-layer {
   position: absolute;
   inset: 0;
@@ -118,13 +105,12 @@
   z-index: 4;
 }
 
-/* 세트 기본 스타일 */
 .terms-term-set {
   position: absolute;
   width: min(320px, 18vw);
   text-align: center;
-  opacity: 0; /* JS가 제어 */
-  transform: translateX(0px); /* JS가 제어 */
+  opacity: 0;
+  transform: translateX(0px);
   will-change: opacity, transform;
 }
 
@@ -143,46 +129,35 @@
   margin: 0;
 }
 
-/* 좌/우 구분 */
 .terms-term-set.side-left { text-align: right; }
 .terms-term-set.side-right { text-align: left; }
 
-/* =========================
-   ✅ 위치 프리셋 (반시계 순서용)
-   rt -> rm -> rb -> lb -> lm -> lt
-========================= */
 
-/* right-top */
 .terms-term-set.pos-rt {
   right: 8vw;
   top: 18vh;
 }
 
-/* right-middle */
 .terms-term-set.pos-rm {
   right: 7vw;
   top: 44vh;
 }
 
-/* right-bottom */
 .terms-term-set.pos-rb {
   right: 8vw;
   top: 70vh;
 }
 
-/* left-bottom */
 .terms-term-set.pos-lb {
   left: 8vw;
   top: 70vh;
 }
 
-/* left-middle */
 .terms-term-set.pos-lm {
   left: 7vw;
   top: 44vh;
 }
 
-/* left-top */
 .terms-term-set.pos-lt {
   left: 8vw;
   top: 18vh;
