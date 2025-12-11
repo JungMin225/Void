@@ -44,7 +44,6 @@ function IntroSection() {
     const a = audioRef.current;
     if (!a) return;
 
-    // 이미 재생 중이면 멈춤
     if (isPlaying) {
       try {
         a.pause();
@@ -53,15 +52,11 @@ function IntroSection() {
       return;}
     }
 
-    // 재생 시작
     try {
-      // 필요하면 항상 처음부터 재생하고 싶을 때:
-      // a.currentTime = 0;
 
       await a.play();
       setIsPlaying(true);
     } catch {
-      // 브라우저 정책/예외 상황 대비
       setIsPlaying(false);
     }
   };
