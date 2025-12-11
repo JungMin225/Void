@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import "./TermsSection.css";
 
-import UnionFrame from "../assets/images/union.png";
+import UnionFrame from "../assets/images/Union.png";
 import MainImage from "../assets/images/main.png";
 
 function getScrollParent(el) {
